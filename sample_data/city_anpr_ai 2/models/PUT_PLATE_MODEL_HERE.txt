@@ -1,0 +1,1 @@
+Optional: put your trained license plate YOLO weights here as license_plate.pt.

@@ -1,0 +1,54 @@
+# City-Wide ANPR AI Engine configuration
+
+app:
+  name: "City-Wide ANPR AI Engine"
+  db_path: "data/anpr.db"
+
+models:
+  vehicle_model: "yolo11n.pt"
+  plate_model: "models/license_plate.pt"   # Optional custom YOLO plate detector
+  use_plate_model: false                   # Set true after adding trained plate weights
+
+video:
+  input: "input/traffic.mp4"
+  frame_skip: 3
+  min_vehicle_confidence: 0.35
+  min_plate_confidence: 0.35
+  ocr_confidence_threshold: 0.35
+  ocr_every_n_vehicle_frames: 4
+
+plate:
+  min_area_ratio: 0.005
+  max_area_ratio: 0.45
+  min_aspect_ratio: 1.5
+  max_aspect_ratio: 8.0
+  padding: 4
+
+tracking:
+  max_disappeared: 20
+  max_distance: 120
+
+trajectory:
+  max_minutes_between_cameras: 180
+  plate_similarity_threshold: 0.82
+
+analytics:
+  congestion_speed_kmh: 20
+  congestion_density_per_minute: 25
+
+cameras:
+  CAM_001:
+    latitude: 15.8281
+    longitude: 78.0373
+    road: "Demo Road A"
+    direction: "North"
+  CAM_002:
+    latitude: 15.8310
+    longitude: 78.0410
+    road: "Demo Road B"
+    direction: "East"
+  CAM_003:
+    latitude: 15.8340
+    longitude: 78.0450
+    road: "Demo Road C"
+    direction: "South"

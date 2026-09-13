@@ -1,0 +1,3177 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:ee8e5fca-8d51-4a56-a005-0e42a1dfecb8",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-13T20:56:35.648113Z",
+    "tools": [
+      {
+        "vendor": "PQC Readiness Suite",
+        "name": "PS-164 Discovery & Risk Engine",
+        "version": "1.0.0"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-45bebb42",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 24,
+            "offset": 0,
+            "symbol": "uint8_t *ciphertext, OQS_KEM *kem);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-d67c2ac2",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 32,
+            "offset": 0,
+            "symbol": "* The macros OQS_KEM_ml_kem_768_length_* and the functions"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-f8317115",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 33,
+            "offset": 0,
+            "symbol": "* OQS_KEM_ml_kem_768_* are only defined if the algorithm"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-0429006f",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 34,
+            "offset": 0,
+            "symbol": "* ML-KEM-768 was enabled at compile-time which must be"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-7af53c47",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 43,
+            "offset": 0,
+            "symbol": "printf(\"[example_stack] OQS_KEM_ml_kem_768 was not enabled at \""
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-eee58409",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 47,
+            "offset": 0,
+            "symbol": "uint8_t public_key[OQS_KEM_ml_kem_768_length_public_key];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-6b2902b8",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 48,
+            "offset": 0,
+            "symbol": "uint8_t secret_key[OQS_KEM_ml_kem_768_length_secret_key];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-3b36e6d6",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 49,
+            "offset": 0,
+            "symbol": "uint8_t ciphertext[OQS_KEM_ml_kem_768_length_ciphertext];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-2904594c",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 50,
+            "offset": 0,
+            "symbol": "uint8_t shared_secret_e[OQS_KEM_ml_kem_768_length_shared_secret];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-a1c3cd87",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 51,
+            "offset": 0,
+            "symbol": "uint8_t shared_secret_d[OQS_KEM_ml_kem_768_length_shared_secret];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-09a0856a",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 53,
+            "offset": 0,
+            "symbol": "OQS_STATUS rc = OQS_KEM_ml_kem_768_keypair(public_key, secret_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-d7a57f7d",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 55,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_ml_kem_768_keypair failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-63263ad4",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 56,
+            "offset": 0,
+            "symbol": "cleanup_stack(secret_key, OQS_KEM_ml_kem_768_length_secret_key,"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-383e4a48",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 58,
+            "offset": 0,
+            "symbol": "OQS_KEM_ml_kem_768_length_shared_secret);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-50603844",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 62,
+            "offset": 0,
+            "symbol": "rc = OQS_KEM_ml_kem_768_encaps(ciphertext, shared_secret_e, public_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-7e19509c",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 64,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_ml_kem_768_encaps failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-5ac2c9a2",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 65,
+            "offset": 0,
+            "symbol": "cleanup_stack(secret_key, OQS_KEM_ml_kem_768_length_secret_key,"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-05c2c8ec",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 67,
+            "offset": 0,
+            "symbol": "OQS_KEM_ml_kem_768_length_shared_secret);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-fbfade69",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 71,
+            "offset": 0,
+            "symbol": "rc = OQS_KEM_ml_kem_768_decaps(shared_secret_d, ciphertext, secret_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-1310b50d",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 73,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_ml_kem_768_decaps failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-d331ad46",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 74,
+            "offset": 0,
+            "symbol": "cleanup_stack(secret_key, OQS_KEM_ml_kem_768_length_secret_key,"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-bc3f9c99",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 76,
+            "offset": 0,
+            "symbol": "OQS_KEM_ml_kem_768_length_shared_secret);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-d849d56f",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 80,
+            "offset": 0,
+            "symbol": "printf(\"[example_stack] OQS_KEM_ml_kem_768 operations completed.\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-6075e4be",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 89,
+            "offset": 0,
+            "symbol": "* OQS_KEM object."
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-1e95edf0",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 93,
+            "offset": 0,
+            "symbol": "* must check that the OQS_KEM object returned is not NULL."
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-11018f6c",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 96,
+            "offset": 0,
+            "symbol": "OQS_KEM *kem = NULL;"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-7ee05d13",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 103,
+            "offset": 0,
+            "symbol": "kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_768);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-c1d7f00c",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 105,
+            "offset": 0,
+            "symbol": "printf(\"[example_heap]  OQS_KEM_ml_kem_768 was not enabled at \""
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-60303987",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 124,
+            "offset": 0,
+            "symbol": "OQS_STATUS rc = OQS_KEM_keypair(kem, public_key, secret_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-4e96a0e3",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 126,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_keypair failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-9e7529a8",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 132,
+            "offset": 0,
+            "symbol": "rc = OQS_KEM_encaps(kem, ciphertext, shared_secret_e, public_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-0d91ac62",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 134,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_encaps failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-14e8797b",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 140,
+            "offset": 0,
+            "symbol": "rc = OQS_KEM_decaps(kem, shared_secret_d, ciphertext, secret_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-dd469f08",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 142,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_decaps failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-3ea0b144",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 149,
+            "offset": 0,
+            "symbol": "printf(\"[example_heap]  OQS_KEM_ml_kem_768 operations completed.\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-f16a7608",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 177,
+            "offset": 0,
+            "symbol": "uint8_t *ciphertext, OQS_KEM *kem) {"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-d95873a4",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 185,
+            "offset": 0,
+            "symbol": "OQS_KEM_free(kem);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-5669040b",
+      "name": "AES-ECB",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 4,
+            "offset": 0,
+            "symbol": "\"algorithm\":\"AES-ECB\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "symmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "AES-ECB",
+          "quantumStatus": "Legacy-Broken"
+        },
+        "pqcTargetState": "AES-256-GCM",
+        "riskAssessment": {
+          "moscaStatus": "HIGH",
+          "actionRequired": "Migrate Classically (Insecure Mode/Hash)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-0d598794",
+      "name": "AES-256-GCM",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 8,
+            "offset": 0,
+            "symbol": "\"replacement\":\"AES-256-GCM\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "variant": "AES-256-GCM",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already Quantum-Resistant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-4ebf66a8",
+      "name": "SHA-1",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 14,
+            "offset": 0,
+            "symbol": "\"algorithm\":\"SHA1\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "hash",
+        "algorithmProperties": {
+          "variant": "SHA-1",
+          "quantumStatus": "Legacy-Broken"
+        },
+        "pqcTargetState": "SHA-256 / SHA-3",
+        "riskAssessment": {
+          "moscaStatus": "HIGH",
+          "actionRequired": "Migrate Classically (Insecure Mode/Hash)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-252c24d1",
+      "name": "SHA-1",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 16,
+            "offset": 0,
+            "symbol": "\"snippet\":\"MessageDigest md = MessageDigest.getInstance(\\\"SHA-1\\\");\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "hash",
+        "algorithmProperties": {
+          "variant": "SHA-1",
+          "quantumStatus": "Legacy-Broken"
+        },
+        "pqcTargetState": "SHA-256 / SHA-3",
+        "riskAssessment": {
+          "moscaStatus": "HIGH",
+          "actionRequired": "Migrate Classically (Insecure Mode/Hash)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-4a31316a",
+      "name": "SHA-3",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 18,
+            "offset": 0,
+            "symbol": "\"replacement\":\"SHA-256 \\/ SHA-3\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "hash",
+        "algorithmProperties": {
+          "variant": "SHA-3",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already Quantum-Resistant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-09373e1a",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 24,
+            "offset": 0,
+            "symbol": "\"algorithm\":\"RSA\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "asymmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "RSA",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "ML-KEM (Kyber) or Hybrid X25519+ML-KEM",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-39f20b18",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 26,
+            "offset": 0,
+            "symbol": "\"snippet\":\"KeyPairGenerator keyGen = KeyPairGenerator.getInstance(\\\"RSA\\\");\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "asymmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "RSA",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "ML-KEM (Kyber) or Hybrid X25519+ML-KEM",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-2942cc75",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 28,
+            "offset": 0,
+            "symbol": "\"replacement\":\"ML-KEM (Kyber) or Hybrid X25519+Kyber\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-d4ff0ea0",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 34,
+            "offset": 0,
+            "symbol": "\"algorithm\":\"RSA\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "asymmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "RSA",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "ML-KEM (Kyber) or Hybrid X25519+ML-KEM",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-a86cbbfe",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 36,
+            "offset": 0,
+            "symbol": "\"snippet\":\"from Crypto.PublicKey import RSA\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "asymmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "RSA",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "ML-KEM (Kyber) or Hybrid X25519+ML-KEM",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-451e8d81",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 38,
+            "offset": 0,
+            "symbol": "\"replacement\":\"ML-KEM (Kyber) or Hybrid X25519+Kyber\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-5d69dca4",
+      "name": "3DES",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 44,
+            "offset": 0,
+            "symbol": "\"algorithm\":\"3DES\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "symmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "3DES",
+          "quantumStatus": "Legacy-Broken"
+        },
+        "pqcTargetState": "AES-256-GCM",
+        "riskAssessment": {
+          "moscaStatus": "HIGH",
+          "actionRequired": "Migrate Classically (Insecure Mode/Hash)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-b059b0c0",
+      "name": "3DES",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 46,
+            "offset": 0,
+            "symbol": "\"snippet\":\"# Vulnerable 3DES encryption\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "symmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "3DES",
+          "quantumStatus": "Legacy-Broken"
+        },
+        "pqcTargetState": "AES-256-GCM",
+        "riskAssessment": {
+          "moscaStatus": "HIGH",
+          "actionRequired": "Migrate Classically (Insecure Mode/Hash)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-a137f4c2",
+      "name": "AES-256-GCM",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 48,
+            "offset": 0,
+            "symbol": "\"replacement\":\"AES-256-GCM\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "variant": "AES-256-GCM",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already Quantum-Resistant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-bedf3bbf",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 54,
+            "offset": 0,
+            "symbol": "\"algorithm\":\"RSA\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "asymmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "RSA",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "ML-KEM (Kyber) or Hybrid X25519+ML-KEM",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-39a43ffc",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 56,
+            "offset": 0,
+            "symbol": "\"snippet\":\"# Vulnerable RSA key size\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "asymmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "RSA",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "ML-KEM (Kyber) or Hybrid X25519+ML-KEM",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-c9be8ccf",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 58,
+            "offset": 0,
+            "symbol": "\"replacement\":\"ML-KEM (Kyber) or Hybrid X25519+Kyber\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-782b215d",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 64,
+            "offset": 0,
+            "symbol": "\"algorithm\":\"RSA\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "asymmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "RSA",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "ML-KEM (Kyber) or Hybrid X25519+ML-KEM",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-a428af4c",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 66,
+            "offset": 0,
+            "symbol": "\"snippet\":\"key = RSA.generate(1024)\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "asymmetric_algorithm",
+        "algorithmProperties": {
+          "variant": "RSA",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "ML-KEM (Kyber) or Hybrid X25519+ML-KEM",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-eaf1d698",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 68,
+            "offset": 0,
+            "symbol": "\"replacement\":\"ML-KEM (Kyber) or Hybrid X25519+Kyber\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-4e0c2cf8",
+      "name": "MD5",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 74,
+            "offset": 0,
+            "symbol": "\"algorithm\":\"MD5\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "hash",
+        "algorithmProperties": {
+          "variant": "MD5",
+          "quantumStatus": "Legacy-Broken"
+        },
+        "pqcTargetState": "SHA-256 / SHA-3",
+        "riskAssessment": {
+          "moscaStatus": "HIGH",
+          "actionRequired": "Migrate Classically (Insecure Mode/Hash)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-648c68cb",
+      "name": "MD5",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 76,
+            "offset": 0,
+            "symbol": "\"snippet\":\"hash_val = hashlib.md5(payload.encode()).hexdigest()\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "hash",
+        "algorithmProperties": {
+          "variant": "MD5",
+          "quantumStatus": "Legacy-Broken"
+        },
+        "pqcTargetState": "SHA-256 / SHA-3",
+        "riskAssessment": {
+          "moscaStatus": "HIGH",
+          "actionRequired": "Migrate Classically (Insecure Mode/Hash)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-40e962ee",
+      "name": "SHA-3",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "cbom_report.json",
+            "line": 78,
+            "offset": 0,
+            "symbol": "\"replacement\":\"SHA-256 \\/ SHA-3\","
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "hash",
+        "algorithmProperties": {
+          "variant": "SHA-3",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already Quantum-Resistant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-3d84728d",
+      "name": "X.509 Certificate (RSA/ECC)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "client-ed25519-cert.pem",
+            "line": 1,
+            "offset": 0,
+            "symbol": "PEM Certificate Payload"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "variant": "X.509 Certificate (RSA/ECC)",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "Review Algorithm Specification",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-b6db7aaf",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 24,
+            "offset": 0,
+            "symbol": "uint8_t *ciphertext, OQS_KEM *kem);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-e73e60f9",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 32,
+            "offset": 0,
+            "symbol": "* The macros OQS_KEM_ml_kem_768_length_* and the functions"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-71b643ae",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 33,
+            "offset": 0,
+            "symbol": "* OQS_KEM_ml_kem_768_* are only defined if the algorithm"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-7fa3bf22",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 34,
+            "offset": 0,
+            "symbol": "* ML-KEM-768 was enabled at compile-time which must be"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-9c5db732",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 43,
+            "offset": 0,
+            "symbol": "printf(\"[example_stack] OQS_KEM_ml_kem_768 was not enabled at \""
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-6c38b320",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 47,
+            "offset": 0,
+            "symbol": "uint8_t public_key[OQS_KEM_ml_kem_768_length_public_key];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-0ae63767",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 48,
+            "offset": 0,
+            "symbol": "uint8_t secret_key[OQS_KEM_ml_kem_768_length_secret_key];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-2394045d",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 49,
+            "offset": 0,
+            "symbol": "uint8_t ciphertext[OQS_KEM_ml_kem_768_length_ciphertext];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-54f887c2",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 50,
+            "offset": 0,
+            "symbol": "uint8_t shared_secret_e[OQS_KEM_ml_kem_768_length_shared_secret];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-148cacc2",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 51,
+            "offset": 0,
+            "symbol": "uint8_t shared_secret_d[OQS_KEM_ml_kem_768_length_shared_secret];"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-28def2c4",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 53,
+            "offset": 0,
+            "symbol": "OQS_STATUS rc = OQS_KEM_ml_kem_768_keypair(public_key, secret_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-7fa66157",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 55,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_ml_kem_768_keypair failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-cd0b707a",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 56,
+            "offset": 0,
+            "symbol": "cleanup_stack(secret_key, OQS_KEM_ml_kem_768_length_secret_key,"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-9db60d69",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 58,
+            "offset": 0,
+            "symbol": "OQS_KEM_ml_kem_768_length_shared_secret);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-93f49b48",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 62,
+            "offset": 0,
+            "symbol": "rc = OQS_KEM_ml_kem_768_encaps(ciphertext, shared_secret_e, public_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-281f7f78",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 64,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_ml_kem_768_encaps failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-0cefff20",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 65,
+            "offset": 0,
+            "symbol": "cleanup_stack(secret_key, OQS_KEM_ml_kem_768_length_secret_key,"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-27947915",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 67,
+            "offset": 0,
+            "symbol": "OQS_KEM_ml_kem_768_length_shared_secret);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-f9805c09",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 71,
+            "offset": 0,
+            "symbol": "rc = OQS_KEM_ml_kem_768_decaps(shared_secret_d, ciphertext, secret_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-657bd293",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 73,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_ml_kem_768_decaps failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-a6f075f8",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 74,
+            "offset": 0,
+            "symbol": "cleanup_stack(secret_key, OQS_KEM_ml_kem_768_length_secret_key,"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-ae38a616",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 76,
+            "offset": 0,
+            "symbol": "OQS_KEM_ml_kem_768_length_shared_secret);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-8d493af2",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 80,
+            "offset": 0,
+            "symbol": "printf(\"[example_stack] OQS_KEM_ml_kem_768 operations completed.\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-a7cc2c44",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 89,
+            "offset": 0,
+            "symbol": "* OQS_KEM object."
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-af39b6e8",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 93,
+            "offset": 0,
+            "symbol": "* must check that the OQS_KEM object returned is not NULL."
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-48e94717",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 96,
+            "offset": 0,
+            "symbol": "OQS_KEM *kem = NULL;"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-b8ecae81",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 103,
+            "offset": 0,
+            "symbol": "kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_768);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-3c54798c",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 105,
+            "offset": 0,
+            "symbol": "printf(\"[example_heap]  OQS_KEM_ml_kem_768 was not enabled at \""
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-6516ec4c",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 124,
+            "offset": 0,
+            "symbol": "OQS_STATUS rc = OQS_KEM_keypair(kem, public_key, secret_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-dde68a2d",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 126,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_keypair failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-cc027b32",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 132,
+            "offset": 0,
+            "symbol": "rc = OQS_KEM_encaps(kem, ciphertext, shared_secret_e, public_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-69ca8a92",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 134,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_encaps failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-cb842d36",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 140,
+            "offset": 0,
+            "symbol": "rc = OQS_KEM_decaps(kem, shared_secret_d, ciphertext, secret_key);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-4209f718",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 142,
+            "offset": 0,
+            "symbol": "fprintf(stderr, \"ERROR: OQS_KEM_decaps failed!\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-a9e223c3",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 149,
+            "offset": 0,
+            "symbol": "printf(\"[example_heap]  OQS_KEM_ml_kem_768 operations completed.\\n\");"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-c992dc9d",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 177,
+            "offset": 0,
+            "symbol": "uint8_t *ciphertext, OQS_KEM *kem) {"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-4653b9ab",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "example_kem.c",
+            "line": 185,
+            "offset": 0,
+            "symbol": "OQS_KEM_free(kem);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-a0b5a4dd",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "ntt.c",
+            "line": 27,
+            "offset": 0,
+            "symbol": "tmp[i] = fqmul(tmp[i-1],MONT*KYBER_ROOT_OF_UNITY % KYBER_Q);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-4a575a80",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "ntt.c",
+            "line": 31,
+            "offset": 0,
+            "symbol": "if(PQCLEAN_MLKEM768_CLEAN_zetas[i] > KYBER_Q/2)"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-688a1048",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "ntt.c",
+            "line": 32,
+            "offset": 0,
+            "symbol": "PQCLEAN_MLKEM768_CLEAN_zetas[i] -= KYBER_Q;"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-4874ed55",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "ntt.c",
+            "line": 33,
+            "offset": 0,
+            "symbol": "if(PQCLEAN_MLKEM768_CLEAN_zetas[i] < -KYBER_Q/2)"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-30a41c1e",
+      "name": "ML-KEM (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "ntt.c",
+            "line": 34,
+            "offset": 0,
+            "symbol": "PQCLEAN_MLKEM768_CLEAN_zetas[i] += KYBER_Q;"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-KEM (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-c2c208c7",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 40,
+            "offset": 0,
+            "symbol": "import org.bouncycastle.pqc.legacy.crystals.dilithium.DilithiumParameters;"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-f943547e",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 41,
+            "offset": 0,
+            "symbol": "import org.bouncycastle.pqc.legacy.crystals.dilithium.DilithiumPrivateKeyParameters;"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-e1e7632e",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 42,
+            "offset": 0,
+            "symbol": "import org.bouncycastle.pqc.legacy.crystals.dilithium.DilithiumPublicKeyParameters;"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-1da4b90d",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 226,
+            "offset": 0,
+            "symbol": "else if (algOID.equals(BCObjectIdentifiers.dilithium2)"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-746b8c83",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 227,
+            "offset": 0,
+            "symbol": "|| algOID.equals(BCObjectIdentifiers.dilithium3) || algOID.equals(BCObjectIdentifiers.dilithium5))"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-43358bed",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 230,
+            "offset": 0,
+            "symbol": "DilithiumParameters dilParams = Utils.dilithiumParamsLookup(algOID);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-00de5bfe",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 244,
+            "offset": 0,
+            "symbol": "DilithiumPublicKeyParameters pubParams = PublicKeyFactory.DilithiumConverter.getPublicKeyParams(dilParams, keyInfo.getPublicKeyData());"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-7eb6a7de",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 246,
+            "offset": 0,
+            "symbol": "return new DilithiumPrivateKeyParameters(dilParams,"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-13479bd9",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 257,
+            "offset": 0,
+            "symbol": "return new DilithiumPrivateKeyParameters(dilParams,"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-f3771261",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 272,
+            "offset": 0,
+            "symbol": "DilithiumPublicKeyParameters pubParams = PublicKeyFactory.DilithiumConverter.getPublicKeyParams(dilParams, keyInfo.getPublicKeyData());"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-253e0b39",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 273,
+            "offset": 0,
+            "symbol": "return new DilithiumPrivateKeyParameters(dilParams, data, pubParams);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-31705a39",
+      "name": "ML-DSA (Post-Quantum)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "PrivateKeyFactory.java",
+            "line": 275,
+            "offset": 0,
+            "symbol": "return new DilithiumPrivateKeyParameters(dilParams, data, null);"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "pqc_algorithm",
+        "algorithmProperties": {
+          "variant": "ML-DSA (Post-Quantum)",
+          "quantumStatus": "Quantum-Safe"
+        },
+        "pqcTargetState": "Already PQC Compliant",
+        "riskAssessment": {
+          "moscaStatus": "LOW",
+          "actionRequired": "Quantum-Resistant / No Action Needed"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-5ac24333",
+      "name": "X.509 Certificate (RSA/ECC)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "root-cert.pem",
+            "line": 1,
+            "offset": 0,
+            "symbol": "PEM Certificate Payload"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "variant": "X.509 Certificate (RSA/ECC)",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "Review Algorithm Specification",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-asset-d120cc3e",
+      "name": "X.509 Certificate (RSA/ECC)",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "server-ed25519-cert.pem",
+            "line": 1,
+            "offset": 0,
+            "symbol": "PEM Certificate Payload"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "variant": "X.509 Certificate (RSA/ECC)",
+          "quantumStatus": "Vulnerable"
+        },
+        "pqcTargetState": "Review Algorithm Specification",
+        "riskAssessment": {
+          "moscaStatus": "CRITICAL",
+          "actionRequired": "Urgent PQC Migration Required (X+Y > Z)"
+        }
+      }
+    }
+  ]
+}

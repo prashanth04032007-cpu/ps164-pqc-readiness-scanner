@@ -1,0 +1,82 @@
+[
+  {
+    "file":"PatientRecords.java",
+    "algorithm":"AES-ECB",
+    "line":8,
+    "snippet":"Cipher cipher = Cipher.getInstance(\"AES\/ECB\/PKCS5Padding\");",
+    "Risk Tier":"Critical (Act Now)",
+    "replacement":"AES-256-GCM",
+    "latency":"None",
+    "cost":"Low"
+  },
+  {
+    "file":"PatientRecords.java",
+    "algorithm":"SHA1",
+    "line":11,
+    "snippet":"MessageDigest md = MessageDigest.getInstance(\"SHA-1\");",
+    "Risk Tier":"Critical (Act Now)",
+    "replacement":"SHA-256 \/ SHA-3",
+    "latency":"None",
+    "cost":"Low"
+  },
+  {
+    "file":"PatientRecords.java",
+    "algorithm":"RSA",
+    "line":14,
+    "snippet":"KeyPairGenerator keyGen = KeyPairGenerator.getInstance(\"RSA\");",
+    "Risk Tier":"Critical (Act Now)",
+    "replacement":"ML-KEM (Kyber) or Hybrid X25519+Kyber",
+    "latency":"Low Impact",
+    "cost":"Medium"
+  },
+  {
+    "file":"Payment_service.py",
+    "algorithm":"RSA",
+    "line":3,
+    "snippet":"from Crypto.PublicKey import RSA",
+    "Risk Tier":"Critical (Act Now)",
+    "replacement":"ML-KEM (Kyber) or Hybrid X25519+Kyber",
+    "latency":"Low Impact",
+    "cost":"Medium"
+  },
+  {
+    "file":"Payment_service.py",
+    "algorithm":"3DES",
+    "line":6,
+    "snippet":"# Vulnerable 3DES encryption",
+    "Risk Tier":"Critical (Act Now)",
+    "replacement":"AES-256-GCM",
+    "latency":"None",
+    "cost":"Low"
+  },
+  {
+    "file":"Payment_service.py",
+    "algorithm":"RSA",
+    "line":9,
+    "snippet":"# Vulnerable RSA key size",
+    "Risk Tier":"Critical (Act Now)",
+    "replacement":"ML-KEM (Kyber) or Hybrid X25519+Kyber",
+    "latency":"Low Impact",
+    "cost":"Medium"
+  },
+  {
+    "file":"Payment_service.py",
+    "algorithm":"RSA",
+    "line":10,
+    "snippet":"key = RSA.generate(1024)",
+    "Risk Tier":"Critical (Act Now)",
+    "replacement":"ML-KEM (Kyber) or Hybrid X25519+Kyber",
+    "latency":"Low Impact",
+    "cost":"Medium"
+  },
+  {
+    "file":"Payment_service.py",
+    "algorithm":"MD5",
+    "line":13,
+    "snippet":"hash_val = hashlib.md5(payload.encode()).hexdigest()",
+    "Risk Tier":"Critical (Act Now)",
+    "replacement":"SHA-256 \/ SHA-3",
+    "latency":"None",
+    "cost":"Low"
+  }
+]
