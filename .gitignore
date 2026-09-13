@@ -27,4 +27,4 @@ build/
 
 # IDE
 .vscode/
-.idea/
+.idea/*.dmg
