@@ -28,3 +28,4 @@ build/
 # IDE
 .vscode/
 .idea/*.dmg
+*.dmg
