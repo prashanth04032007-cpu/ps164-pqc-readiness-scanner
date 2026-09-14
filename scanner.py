@@ -1,83 +1,77 @@
-import re
+"""
+scanner.py
+Master Scan Orchestrator Unifying Discovery Engines (PS-164)
+"""
 
-def scan_file(content_text, filename):
+from scanners.source_scanner import scan_source_file
+from scanners.dependency_scanner import scan_dependency_file
+from scanners.protocol_scanner import scan_protocol_file
+from scanners.binary_scanner import scan_binary_file
+from scanners.config_scanner import scan_config_file
+
+# Safe resilient import for certificate scanner
+try:
+    from scanners.certificate_scanner import parse_certificate_file
+except ImportError:
+    try:
+        from scanners.certificate_scanner import scan_certificate_file as parse_certificate_file
+    except ImportError:
+        try:
+            from scanners.certificate_scanner import scan_certificate as parse_certificate_file
+        except ImportError:
+            def parse_certificate_file(filename, content_str):
+                return []
+
+
+def scan_file(content_input, filename: str) -> list:
+    """
+    Orchestrates file inspection across dedicated scanners based on file type 
+    and returns a unified list of normalized cryptographic findings.
+    """
     findings = []
-    lines = content_text.split('\n')
-    ext = filename.split('.')[-1].lower() if '.' in filename else ''
+    f_lower = filename.lower()
     
-    # 1. Certificate Files (.pem, .crt)
-    if ext in ['pem', 'crt']:
-        if "BEGIN CERTIFICATE" in content_text:
-            findings.append({
-                "file": filename,
-                "asset_type": "certificate",
-                "algorithm": "X.509 Certificate (RSA/ECC)",
-                "line": 1,
-                "snippet": "PEM Certificate Payload",
-                "quantum_status": "Vulnerable"
-            })
+    # 1. Handle X.509 Certificate files (.pem, .crt, .cer, .der)
+    if any(f_lower.endswith(ext) for ext in ['.pem', '.crt', '.cer', '.der']):
+        content_str = (
+            content_input.decode('utf-8', errors='ignore') 
+            if isinstance(content_input, bytes) 
+            else str(content_input)
+        )
+        findings.extend(parse_certificate_file(filename, content_str))
         return findings
 
-    # 2. Dependency Manifest Files
-    if filename.lower() in ['requirements.txt', 'pom.xml', 'package.json'] or ext in ['txt', 'xml', 'json']:
-        dep_patterns = {
-            r"pycryptodome": ("PyCryptodome Library", "Vulnerable"),
-            r"bouncycastle|bcprov": ("Bouncy Castle PKI Provider", "Vulnerable"),
-            r"openssl": ("OpenSSL Crypto Suite", "Vulnerable"),
-            r"liboqs": ("Open Quantum Safe (liboqs)", "Quantum-Safe")
-        }
-        for line_num, line in enumerate(lines, 1):
-            for pattern, (label, status) in dep_patterns.items():
-                if re.search(pattern, line, re.IGNORECASE):
-                    findings.append({
-                        "file": filename,
-                        "asset_type": "dependency",
-                        "algorithm": label,
-                        "line": line_num,
-                        "snippet": line.strip(),
-                        "quantum_status": status
-                    })
-        if findings:
-            return findings
+    # 2. Handle Binary files (.jar, .class, .so, .dll, .exe)
+    binary_extensions = ['.jar', '.class', '.so', '.dll', '.exe', '.bin']
+    if any(f_lower.endswith(ext) for ext in binary_extensions):
+        content_bytes = (
+            content_input if isinstance(content_input, bytes)
+            else str(content_input).encode('utf-8', errors='ignore')
+        )
+        findings.extend(scan_binary_file(filename, content_bytes))
+        return findings
 
-    # 3. Source Code Scanning (.c, .cpp, .h, .java, .py, .go, etc.)
-    code_patterns = [
-        # Quantum Safe / PQC Algorithms
-        (r"ML-KEM|Kyber|OQS_KEM", "ML-KEM (Post-Quantum)", "Quantum-Safe", "pqc_algorithm"),
-        (r"ML-DSA|Dilithium|OQS_SIG", "ML-DSA (Post-Quantum)", "Quantum-Safe", "pqc_algorithm"),
-        (r"SLH-DSA|SPHINCS\+", "SLH-DSA (Post-Quantum)", "Quantum-Safe", "pqc_algorithm"),
-        (r"AES[-_]?256[-_]?GCM|EVP_aes_256_gcm", "AES-256-GCM", "Quantum-Safe", "algorithm"),
-        (r"SHA[-_]?3|SHA3|EVP_sha3_256", "SHA-3", "Quantum-Safe", "hash"),
-        (r"SHA[-_]?256|EVP_sha256", "SHA-256", "Quantum-Safe", "hash"),
-        
-        # Quantum Vulnerable Classical Algorithms (Asymmetric)
-        (r"RSA(?:_\w+|-\d+)?|EVP_PKEY_RSA|RSA_generate_key|KeyPairGenerator\.getInstance\s*\(\s*\"RSA\"", "RSA", "Vulnerable", "asymmetric_algorithm"),
-        (r"ECDSA|ECDH|EVP_PKEY_EC|EC_KEY_new", "ECC (Elliptic Curve)", "Vulnerable", "asymmetric_algorithm"),
-        (r"DSA_generate_parameters|EVP_PKEY_DSA", "DSA", "Vulnerable", "asymmetric_algorithm"),
-        
-        # Broken/Weak Classical Algorithms & Modes
-        (r"DESede|3DES|DES_ecb_encrypt|DES_cbc_encrypt", "3DES", "Legacy-Broken", "symmetric_algorithm"),
-        (r"AES[-_/]ECB|EVP_aes_\d+_ecb|AES_ecb_encrypt", "AES-ECB", "Legacy-Broken", "symmetric_algorithm"),
-        (r"MD5|MD5_Init|EVP_md5|MessageDigest\.getInstance\s*\(\s*\"MD5\"", "MD5", "Legacy-Broken", "hash"),
-        (r"SHA-?1|SHA1_Init|EVP_sha1|MessageDigest\.getInstance\s*\(\s*\"SHA-1\"", "SHA-1", "Legacy-Broken", "hash"),
-        (r"SSLv3|TLSv1\.0|TLSv1\.1", "SSLv3 / TLS 1.0 (Weak Protocol)", "Legacy-Broken", "protocol")
-    ]
+    # Ensure content is string for text/manifest/source/config analysis
+    content_str = (
+        content_input.decode('utf-8', errors='ignore') 
+        if isinstance(content_input, bytes) 
+        else str(content_input)
+    )
 
-    for line_num, line in enumerate(lines, 1):
-        stripped_line = line.strip()
-        if stripped_line.startswith("//") or stripped_line.startswith("#") or stripped_line.startswith("/*"):
-            continue
-            
-        for pattern, algo_name, status, asset_type in code_patterns:
-            if re.search(pattern, line, re.IGNORECASE):
-                findings.append({
-                    "file": filename,
-                    "asset_type": asset_type,
-                    "algorithm": algo_name,
-                    "line": line_num,
-                    "snippet": line.strip(),
-                    "quantum_status": status
-                })
-                break
+    # 3. Handle Dependency & Library Manifest Files
+    dep_files = ['requirements.txt', 'pipfile', 'package.json', 'pom.xml', 'build.gradle', 'go.mod', 'cargo.toml']
+    if any(f_lower.endswith(d) or d in f_lower for d in dep_files):
+        findings.extend(scan_dependency_file(filename, content_str))
+        return findings
 
+    # 4. Handle Protocol & Server Configuration Files (e.g., nginx.conf, sshd_config)
+    config_exts = ['.conf', '.config', '.ini', '.properties']
+    if any(f_lower.endswith(ext) for ext in config_exts) or 'nginx' in f_lower or 'sshd' in f_lower:
+        findings.extend(scan_config_file(filename, content_str))
+        findings.extend(scan_protocol_file(filename, content_str))
+        return findings
+
+    # 5. Default to Source Code Scanner (Java, Python, C/C++, Go, JS, Rust, etc.)
+    findings.extend(scan_source_file(filename, content_str))
+    
     return findings

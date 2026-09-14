@@ -1,0 +1,56 @@
+{
+  "RSA-2048": {
+    "family": "RSA",
+    "type": "asymmetric",
+    "quantum_status": "QUANTUM-VULNERABLE",
+    "classical_status": "SECURE",
+    "purposes": ["key_establishment", "digital_signature", "encryption"],
+    "pqc_recommendation": "ML-KEM-768",
+    "standard": "FIPS 203"
+  },
+  "ECDSA-P256": {
+    "family": "ECDSA",
+    "type": "signature",
+    "quantum_status": "QUANTUM-VULNERABLE",
+    "classical_status": "SECURE",
+    "purposes": ["digital_signature"],
+    "pqc_recommendation": "ML-DSA-65",
+    "standard": "FIPS 204"
+  },
+  "SHA-1": {
+    "family": "SHA",
+    "type": "hash",
+    "quantum_status": "QUANTUM-RESISTANT",
+    "classical_status": "BROKEN",
+    "purposes": ["hashing"],
+    "pqc_recommendation": "SHA-256",
+    "standard": "NIST SP 800-107"
+  },
+  "3DES": {
+    "family": "DES",
+    "type": "symmetric",
+    "quantum_status": "QUANTUM-RESISTANT",
+    "classical_status": "DEPRECATED",
+    "purposes": ["data_encryption"],
+    "pqc_recommendation": "AES-256",
+    "standard": "NIST SP 800-67"
+  },
+  "ML-KEM-768": {
+    "family": "ML-KEM",
+    "type": "kem",
+    "quantum_status": "PQC-STANDARDIZED",
+    "classical_status": "SECURE",
+    "purposes": ["key_establishment"],
+    "pqc_recommendation": "ML-KEM-768",
+    "standard": "FIPS 203"
+  },
+  "ML-DSA-65": {
+    "family": "ML-DSA",
+    "type": "signature",
+    "quantum_status": "PQC-STANDARDIZED",
+    "classical_status": "SECURE",
+    "purposes": ["digital_signature"],
+    "pqc_recommendation": "ML-DSA-65",
+    "standard": "FIPS 204"
+  }
+}
