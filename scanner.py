@@ -33,12 +33,12 @@ def scan_file(content_input, filename: str) -> list:
     
     # 1. Handle X.509 Certificate files (.pem, .crt, .cer, .der)
     if any(f_lower.endswith(ext) for ext in ['.pem', '.crt', '.cer', '.der']):
-        content_str = (
-            content_input.decode('utf-8', errors='ignore') 
-            if isinstance(content_input, bytes) 
+        certificate_input = (
+            content_input
+            if isinstance(content_input, bytes)
             else str(content_input)
         )
-        findings.extend(parse_certificate_file(filename, content_str))
+        findings.extend(parse_certificate_file(filename, certificate_input))
         return findings
 
     # 2. Handle Binary files (.jar, .class, .so, .dll, .exe)
