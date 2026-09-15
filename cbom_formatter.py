@@ -1,81 +1,257 @@
-"""CycloneDX v1.6 CBOM exporter using the ECDAT recommendation engine."""
 from __future__ import annotations
 
-import datetime
-import uuid
+import json
+from dataclasses import asdict
+from datetime import datetime, timezone
+from enum import Enum
+from pathlib import Path
+from typing import Any, Iterable
 
-from pqc_recommendations import get_pqc_recommendation
-
-
-def get_recommendation(algorithm: str, purpose: str = "", asset_type: str = "", protocol: str = "", environment: str = "", risk_tier: str = "", evidence_type: str = "") -> dict:
-    return get_pqc_recommendation(algorithm, purpose, asset_type, protocol, environment, risk_tier, evidence_type)
-
-
-def _line(value) -> int:
-    try:
-        return int(value or 1)
-    except (TypeError, ValueError):
-        return 1
+from core.models import CryptoAsset
 
 
-def export_cyclonedx_cbom(df) -> dict:
-    components = []
-    root_uuid = str(uuid.uuid4())
-    components.append({
-        "type": "application",
-        "bom-ref": root_uuid,
-        "name": "PS-164-Scanned-Project",
-        "version": "1.0.0",
-    })
-    dep_depends_on = []
+def _serialize(value: Any) -> Any:
+    """
+    Convert dataclasses, enums, lists and dictionaries into
+    JSON-serializable Python objects.
+    """
+    if isinstance(value, Enum):
+        return value.value
 
-    for _, row in df.iterrows():
-        comp_uuid = str(uuid.uuid4())
-        dep_depends_on.append(comp_uuid)
-        algo = str(row.get("algorithm", "UNKNOWN"))
-        asset_type = str(row.get("asset_type", "algorithm"))
-        purpose = str(row.get("purpose", "unknown"))
-        q_status = str(row.get("quantum_status", "QUANTUM-VULNERABLE"))
-        rec = get_recommendation(
-            algo, purpose, asset_type, row.get("protocol", ""),
-            row.get("environment", ""), row.get("Risk Tier", ""), row.get("evidence_type", ""),
-        )
-        cdx_type = "cryptographic-asset"
-        if asset_type == "certificate": cdx_type = "certificate"
-        elif asset_type == "library_provider": cdx_type = "library"
-        elif asset_type == "protocol": cdx_type = "protocol"
-        components.append({
-            "type": cdx_type,
-            "bom-ref": comp_uuid,
-            "name": algo,
-            "version": str(row.get("version", "1.0")),
-            "cryptoProperties": {
-                "assetType": asset_type,
-                "purpose": purpose,
-                "quantumRisk": q_status,
-                "location": {"file": str(row.get("file", "")), "line": _line(row.get("line"))},
-                "pqcRecommendation": {
-                    "replacement": rec["replacement"],
-                    "hybridOption": rec["hybrid_option"],
-                    "standard": rec["standard"],
-                    "migrationStrategy": rec["migration_strategy"],
-                    "rationale": rec["rationale"],
-                    "latencyImpact": rec["latency"],
-                    "migrationCost": rec["cost"],
-                    "compatibility": rec["compatibility"],
-                },
-            },
-        })
+    if hasattr(value, "__dataclass_fields__"):
+        return {
+            key: _serialize(item)
+            for key, item in asdict(value).items()
+        }
+
+    if isinstance(value, dict):
+        return {
+            str(key): _serialize(item)
+            for key, item in value.items()
+        }
+
+    if isinstance(value, (list, tuple, set)):
+        return [_serialize(item) for item in value]
+
+    return value
+
+
+def asset_to_cbom_component(asset: CryptoAsset) -> dict[str, Any]:
+    """
+    Convert one CryptoAsset into a CBOM component.
+    """
+
+    component = asset.component
+    evidence = asset.evidence
+    business = asset.business
+    quantum = asset.quantum
+    risk = asset.risk
+    recommendation = asset.recommendation
+
+    properties = {
+        "asset_id": asset.asset_id,
+        "asset_status": asset.asset_status,
+
+        "algorithm": asset.algorithm,
+        "algorithm_family": asset.algorithm_family,
+        "algorithm_type": asset.algorithm_type,
+        "variant": asset.variant,
+        "key_size": asset.key_size,
+        "curve": asset.curve,
+        "mode": asset.mode,
+        "padding": asset.padding,
+        "hash_algorithm": asset.hash_algorithm,
+
+        "protocol": asset.protocol,
+        "protocol_version": asset.protocol_version,
+
+        "purpose": _serialize(asset.purpose),
+
+        "quantum_status": _serialize(quantum.quantum_status),
+        "classical_status": _serialize(quantum.classical_status),
+        "harvest_now_decrypt_later": quantum.harvest_now_decrypt_later,
+        "quantum_attack_type": quantum.quantum_attack_type,
+        "pqc_standard": quantum.pqc_standard,
+        "pqc_readiness": quantum.pqc_readiness,
+
+        "mosca": {
+            "data_lifetime_years": quantum.x_data_lifetime,
+            "migration_time_years": quantum.y_migration_time,
+            "crqc_horizon_years": quantum.z_crqc_horizon,
+            "margin": quantum.mosca_margin,
+            "ratio": quantum.mosca_ratio,
+            "result": quantum.mosca_result,
+        },
+
+        "risk": {
+            "score": risk.risk_score,
+            "tier": _serialize(risk.risk_tier),
+            "priority": _serialize(risk.priority),
+            "factors": list(risk.risk_factors),
+            "explanation": risk.risk_explanation,
+        },
+
+        "recommendation": {
+            "recommended_algorithm": recommendation.recommended_algorithm,
+            "recommended_family": recommendation.recommended_family,
+            "migration_strategy": _serialize(
+                recommendation.migration_strategy
+            ),
+            "hybrid_option": recommendation.hybrid_option,
+            "compatibility": recommendation.compatibility,
+            "latency_impact": recommendation.latency_impact,
+            "performance_impact": recommendation.performance_impact,
+            "migration_cost": recommendation.migration_cost,
+            "migration_complexity": recommendation.migration_complexity,
+            "reason": recommendation.recommendation_reason,
+        },
+
+        "component": {
+            "application_name": component.application_name,
+            "component_name": component.component_name,
+            "library_name": component.library_name,
+            "library_version": component.library_version,
+            "binary_name": component.binary_name,
+            "binary_version": component.binary_version,
+            "container_name": component.container_name,
+            "container_digest": component.container_digest,
+            "environment": component.environment,
+        },
+
+        "evidence": {
+            "source_type": evidence.source_type if evidence else None,
+            "source_path": evidence.source_path if evidence else None,
+            "line_start": evidence.line_start if evidence else None,
+            "line_end": evidence.line_end if evidence else None,
+            "evidence_text": evidence.evidence_text if evidence else None,
+            "detection_method": (
+                _serialize(evidence.detection_method)
+                if evidence
+                else None
+            ),
+            "confidence": evidence.confidence if evidence else None,
+        },
+
+        "business_context": {
+            "data_sensitivity": business.data_sensitivity,
+            "business_criticality": business.business_criticality,
+            "data_lifetime_years": business.data_lifetime_years,
+            "migration_time_years": business.migration_time_years,
+            "internet_exposure": business.internet_exposure,
+        },
+    }
+
+    # Remove empty values from the component while retaining
+    # the core analytical fields.
+    properties = {
+        key: value
+        for key, value in properties.items()
+        if value is not None
+    }
+
+    return {
+        "type": "cryptographic-asset",
+        "name": asset.asset_name,
+        "bom-ref": asset.asset_id,
+        "properties": properties,
+    }
+
+
+def assets_to_cbom(
+    assets: Iterable[CryptoAsset],
+    source_name: str = "PQC Readiness Scanner",
+) -> dict[str, Any]:
+    """
+    Create a complete CBOM document from CryptoAsset objects.
+
+    The structure follows a CycloneDX-inspired BOM structure while
+    preserving PQC-specific analytics required by PS-164.
+    """
+
+    asset_list = list(assets)
+
+    components = [
+        asset_to_cbom_component(asset)
+        for asset in asset_list
+    ]
 
     return {
         "bomFormat": "CycloneDX",
         "specVersion": "1.6",
-        "serialNumber": f"urn:uuid:{uuid.uuid4()}",
+        "serialNumber": (
+            f"urn:uuid:pqc-scanner-"
+            f"{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S%f')}"
+        ),
         "version": 1,
+
         "metadata": {
-            "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            "tools": [{"vendor": "PS-164", "name": "PQC Discovery & Quantum Risk Assessment Platform", "version": "1.0.0"}],
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "tools": [
+                {
+                    "vendor": "PQC Readiness Scanner",
+                    "name": "PQC Readiness Scanner",
+                    "version": "0.1.0",
+                }
+            ],
+            "source": source_name,
         },
+
+        "properties": {
+            "cbom_type": "cryptographic-bill-of-materials",
+            "pqc_analysis": True,
+            "risk_analysis": True,
+            "mosca_analysis": True,
+            "recommendation_analysis": True,
+            "asset_count": len(asset_list),
+        },
+
         "components": components,
-        "dependencies": [{"ref": root_uuid, "dependsOn": dep_depends_on}],
     }
+
+
+def export_cbom(
+    assets: Iterable[CryptoAsset],
+    output_path: str | Path,
+    source_name: str = "PQC Readiness Scanner",
+) -> dict[str, Any]:
+    """
+    Generate and save CBOM JSON.
+    """
+
+    cbom = assets_to_cbom(
+        assets,
+        source_name=source_name,
+    )
+
+    output = Path(output_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    with output.open("w", encoding="utf-8") as file:
+        json.dump(
+            cbom,
+            file,
+            indent=2,
+            ensure_ascii=False,
+        )
+
+    return cbom
+
+
+def cbom_to_json(
+    assets: Iterable[CryptoAsset],
+    source_name: str = "PQC Readiness Scanner",
+) -> str:
+    """
+    Return CBOM as formatted JSON text.
+    """
+
+    cbom = assets_to_cbom(
+        assets,
+        source_name=source_name,
+    )
+
+    return json.dumps(
+        cbom,
+        indent=2,
+        ensure_ascii=False,
+    )
