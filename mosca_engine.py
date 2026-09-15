@@ -1,17 +1,12 @@
-"""ECDAT Quantum Risk & MOSCA Decision Engine (PS-164).
-
-The engine keeps the three scenario methods exposed by the UI while making the
-risk decision transparent: Mosca exposure (X+Y vs Z) is combined with data
-sensitivity, business criticality, operational exposure, and classical status.
 """
-from __future__ import annotations
-
-import json
+mosca_engine.py
+MOSCA Risk & Contextual Prioritization Engine (PS-164)
+"""
 import os
-from typing import Any
+import json
 
 CATALOG_PATH = os.path.join(os.path.dirname(__file__), "data", "crypto_catalog.json")
-CRYPTO_CATALOG: dict[str, Any] = {}
+CRYPTO_CATALOG = {}
 if os.path.exists(CATALOG_PATH):
     try:
         with open(CATALOG_PATH, "r", encoding="utf-8") as f:
@@ -20,105 +15,106 @@ if os.path.exists(CATALOG_PATH):
         CRYPTO_CATALOG = {}
 
 
-def _num(value: Any, default: float) -> float:
-    try:
-        if value is None:
-            return default
-        return float(value)
-    except (TypeError, ValueError):
-        return default
-
-
-def _scale(value: Any, default: int = 3) -> int:
-    return max(1, min(5, int(round(_num(value, default)))))
-
-
-def _catalog_for(algorithm: str) -> dict[str, Any]:
-    algo = str(algorithm or "").upper().strip()
-    if algo in CRYPTO_CATALOG:
-        return CRYPTO_CATALOG[algo]
-    # Match catalog families conservatively; exact algorithm names win.
-    for key, entry in CRYPTO_CATALOG.items():
-        if key.upper() in algo or algo in key.upper():
-            return entry
-    return {}
-
-
 def derive_asset_context(finding: dict) -> dict:
-    """Derive purpose, exposure, defaults and crypto status for one finding."""
-    algorithm = str(finding.get("algorithm", "")).upper().strip()
+    """
+    Derives functional purpose, operational exposure, data sensitivity,
+    shelf-life (X), migration time (Y), and MOSCA risk prioritization
+    respecting per-asset/per-file metadata or the crypto catalog if present. [cite: 1]
+    """
+    algorithm = str(finding.get("algorithm", "")).upper()
     asset_type = str(finding.get("asset_type", "")).lower()
     source = str(finding.get("source", finding.get("file", ""))).lower()
-    catalog = _catalog_for(algorithm)
 
-    purposes = catalog.get("purposes") or []
-    if purposes:
-        purpose = purposes[0]
-    elif any(k in algorithm for k in ("RSA", "ECDH", "ECDHE", "DH", "KYBER", "ML-KEM")):
+    # Check if algorithm exists in catalog first
+    catalog_entry = CRYPTO_CATALOG.get(algorithm, {})
+
+    # 1. Determine Cryptographic Purpose
+    if catalog_entry and "purposes" in catalog_entry and catalog_entry["purposes"]:
+        purpose = catalog_entry["purposes"][0]
+    elif any(k in algorithm for k in ["RSA", "ECDH", "DH", "KYBER", "ML-KEM"]):
         purpose = "key_establishment"
-    elif any(k in algorithm for k in ("ECDSA", "ED25519", "ED448", "DSA", "DILITHIUM", "ML-DSA", "SLH-DSA")):
+    elif any(k in algorithm for k in ["ECDSA", "DSA", "DILITHIUM", "ML-DSA", "SLH-DSA"]):
         purpose = "digital_signature"
-    elif any(k in algorithm for k in ("AES", "DES", "3DES", "RC4", "CHACHA")):
+    elif any(k in algorithm for k in ["AES", "DES", "3DES", "RC4"]):
         purpose = "data_encryption"
-    elif any(k in algorithm for k in ("MD5", "SHA-1", "SHA1", "SHA-256", "SHA-384", "SHA-512", "SHA-3")):
+    elif any(k in algorithm for k in ["MD5", "SHA-1", "SHA-256", "SHA-3"]):
         purpose = "hashing"
     else:
         purpose = "crypto_provider" if asset_type == "library_provider" else "unknown"
 
-    defaults = {
-        "key_establishment": (7.0, 3.0, 4, 4),
-        "digital_signature": (6.0, 2.5, 4, 4),
-        "data_encryption": (10.0, 2.0, 4, 4),
-        "hashing": (2.0, 1.0, 2, 2),
-        "crypto_provider": (5.0, 2.0, 2, 2),
-        "unknown": (5.0, 2.0, 3, 3),
+    # Default weights by purpose
+    purpose_defaults = {
+        "key_establishment": (7.0, 3.0, 3.0, 3.0),
+        "digital_signature": (3.0, 2.0, 3.0, 3.0),
+        "data_encryption": (10.0, 2.0, 3.0, 3.0),
+        "hashing": (2.0, 1.0, 2.0, 2.0),
+        "crypto_provider": (5.0, 2.0, 2.0, 2.0),
+        "unknown": (5.0, 2.0, 2.0, 2.0)
     }
-    dx, dy, ds, db = defaults.get(purpose, defaults["unknown"])
+    default_x, default_y, default_w, default_b = purpose_defaults.get(purpose, (5.0, 2.0, 2.0, 2.0))
 
-    x = _num(finding.get("x_shelf_life"), dx)
-    y = _num(finding.get("y_migration_time"), dy)
-    sensitivity = _scale(finding.get("data_sensitivity"), ds)
-    criticality = _scale(finding.get("business_criticality"), db)
+    # Allow per-asset / per-file metadata override (P0 Fixes #1, #2, #4) [cite: 1]
+    x_shelf_life = float(finding.get("x_shelf_life", default_x))
+    y_migration_time = float(finding.get("y_migration_time", default_y))
+    data_sensitivity = float(finding.get("data_sensitivity", default_w))
+    business_criticality = float(finding.get("business_criticality", default_b))
 
-    if any(k in source for k in ("nginx", "apache", "sshd", "server", "ingress", "gateway", "cert", ".pem", ".crt", "public")):
+    # 2. Determine Operational Exposure
+    if any(k in source for k in ["nginx", "sshd", "server", "cert", "pem", "crt", "public"]):
         exposure = "external_facing"
-    elif any(k in source for k in ("config", "api", "client", "service", "container")):
+    elif any(k in source for k in ["config", "api", "client"]):
         exposure = "internal_service"
     else:
         exposure = "isolated_code"
 
-    q_status = str(catalog.get("quantum_status", finding.get("quantum_status", "QUANTUM-VULNERABLE"))).upper()
-    if any(k in algorithm for k in ("ML-KEM", "ML-DSA", "SLH-DSA", "KYBER", "DILITHIUM", "SPHINCS+")):
-        q_status = "PQC-STANDARDIZED"
-    elif any(k in algorithm for k in ("AES-256", "SHA-256", "SHA-384", "SHA-512", "SHA-3", "CHACHA20")):
-        q_status = "QUANTUM-RESISTANT"
+    # 3. Determine Quantum Status
+    if catalog_entry and "quantum_status" in catalog_entry:
+        q_status = catalog_entry["quantum_status"]
+    else:
+        q_status = finding.get("quantum_status", "QUANTUM-VULNERABLE").upper()
+        if any(k in algorithm for k in ["ML-KEM", "ML-DSA", "SLH-DSA", "KYBER", "DILITHIUM", "SPHINCS+"]):
+            q_status = "QUANTUM-SAFE"
+        elif any(k in algorithm for k in ["AES-256", "SHA-256", "SHA-3", "SHA-512"]):
+            q_status = "QUANTUM-RESISTANT"
 
-    classical = str(catalog.get("classical_status", finding.get("classical_status", "SECURE"))).upper()
+    # 4. Calculate Risk Score, Risk Tier, and Priority
+    if q_status == "QUANTUM-SAFE":
+        risk_score = 10
+        risk_tier = "LOW"
+        priority = "P4"
+    elif q_status == "QUANTUM-RESISTANT":
+        risk_score = 25
+        risk_tier = "LOW"
+        priority = "P3"
+    else:  # Quantum Vulnerable / Legacy Broken
+        if exposure == "external_facing" and purpose in ["key_establishment", "digital_signature"]:
+            risk_score = 95
+            risk_tier = "CRITICAL"
+            priority = "P1"
+        elif exposure == "external_facing":
+            risk_score = 80
+            risk_tier = "HIGH"
+            priority = "P1"
+        elif purpose in ["key_establishment", "digital_signature"]:
+            risk_score = 75
+            risk_tier = "HIGH"
+            priority = "P2"
+        else:
+            risk_score = 50
+            risk_tier = "MEDIUM"
+            priority = "P3"
+
     return {
         "purpose": purpose,
         "exposure": exposure,
         "quantum_status": q_status,
-        "classical_status": classical,
-        "x_shelf_life": x,
-        "y_migration_time": y,
-        "data_sensitivity": sensitivity,
-        "business_criticality": criticality,
-    }
-
-
-def _safe_result(tier: str, priority: str, action: str, x: float, y: float, z: float,
-                 metric: float, label: str, explanation: str, score: float = 0.0,
-                 mosca_status: str = "NOT_APPLICABLE", margin: float = 0.0,
-                 ratio: float = 0.0) -> dict:
-    return {
-        "tier": tier, "risk_tier": tier,
-        "priority": priority, "action": action,
-        "X": x, "Y": y, "Z": z,
-        "exposure_years": round(x + y, 2),
-        "metric_value": round(metric, 2), "metric_label": label,
-        "risk_score": round(max(0.0, min(100.0, score)), 2),
-        "mosca_status": mosca_status, "mosca_margin": round(margin, 2),
-        "exposure_ratio": round(ratio, 2), "explanation": explanation,
+        "risk_score": risk_score,
+        "Risk Tier": risk_tier,
+        "Priority": priority,
+        "x_shelf_life": x_shelf_life,
+        "y_migration_time": y_migration_time,
+        "data_sensitivity": data_sensitivity,
+        "business_criticality": business_criticality
     }
 
 
@@ -130,119 +126,174 @@ def evaluate_asset_risk(
     x_shelf_life: float,
     y_migration_time: float,
     z_crqc_horizon: float,
-    data_sensitivity: int = 3,
-    business_criticality: int = 3,
-    method: str = "Standard Mosca Inequality (X + Y > Z)",
-    exposure: str = "isolated_code",
+    data_sensitivity: int = 3,       # Scale 1 (Public) to 5 (Highly Sensitive)
+    business_criticality: int = 3,   # Scale 1 (Non-critical) to 5 (Mission-critical)
+    method: str = "Standard Mosca Inequality (X + Y > Z)"
 ):
-    """Evaluate one asset using transparent PS-164 quantum-risk logic."""
-    x = max(0.0, _num(x_shelf_life, 5.0))
-    y = max(0.0, _num(y_migration_time, 2.0))
-    z = max(1.0, _num(z_crqc_horizon, 10.0))
-    sensitivity = _scale(data_sensitivity)
-    criticality = _scale(business_criticality)
-    q = str(quantum_status or "QUANTUM-VULNERABLE").upper()
-    classical = str(classical_status or "SECURE").upper()
-    algo = str(algorithm or "UNKNOWN")
-    purpose = str(purpose or "unknown")
+    """
+    Tuned & Calibrated Cryptographic Asset Risk Evaluation Engine (PS-164).
+    Supports Standard Mosca, Sensitivity-Weighted QPS, and Data Shelf-Life Ratio. [cite: 1]
+    """
+    total_exposure = round(x_shelf_life + y_migration_time, 2)
+    z_safe = max(1.0, float(z_crqc_horizon))
+    margin = round(total_exposure - z_safe, 2)
+    exposure_ratio = round(total_exposure / z_safe, 2)
 
-    total = x + y
-    margin = total - z
-    ratio = total / z
-    mosca_status = "EXCEEDS_HORIZON" if total > z else "WITHIN_HORIZON"
-    broken = classical in {"BROKEN", "DEPRECATED", "INSECURE"}
-    pqc = q in {"PQC-STANDARDIZED", "QUANTUM-SAFE"} and not broken
-    resistant = q == "QUANTUM-RESISTANT" and not broken
+    is_classical_broken = classical_status in ["BROKEN", "DEPRECATED"]
+    is_pqc = quantum_status in ["PQC-STANDARDIZED", "QUANTUM-RESISTANT"] and not is_classical_broken
 
-    # Already-standardized PQC is not assigned migration urgency.
-    if pqc:
-        return _safe_result(
-            "LOW", "P3", "No PQC migration required; maintain crypto inventory",
-            x, y, z, 0.0, "Safe (PQC)",
-            f"{algo} is marked {q}; the asset is treated as PQC-ready under this assessment scenario.",
-            5.0, "NOT_APPLICABLE", margin, ratio,
-        )
+    if is_pqc:
+        return {
+            "tier": "LOW",
+            "priority": "P3",
+            "action": "Quantum-Resistant / No Action Needed",
+            "X": x_shelf_life,
+            "Y": y_migration_time,
+            "Z": z_crqc_horizon,
+            "exposure_years": 0.0,
+            "metric_value": 0.0,
+            "metric_label": "Safe (PQC)",
+            "explanation": f"{algorithm} ({purpose}) is quantum-resistant and compliant with NIST standards."
+        }
 
-    # Quantum-resistant symmetric/hash primitives can still be classically weak.
-    if resistant and not broken:
-        return _safe_result(
-            "LOW", "P3", "No quantum migration required; continue lifecycle monitoring",
-            x, y, z, 0.0, "Quantum-Resistant", 
-            f"{algo} is treated as quantum-resistant for this scenario. Continue normal algorithm and key-lifecycle governance.",
-            10.0, "NOT_APPLICABLE", margin, ratio,
-        )
-
-    # Classical break/deprecation always outranks a long Mosca horizon.
-    if broken:
-        score = 82 + 3 * (sensitivity - 3) + 3 * (criticality - 3)
-        if exposure == "external_facing":
-            score += 6
-        tier = "CRITICAL" if score >= 80 else "HIGH"
-        priority = "P0" if sensitivity >= 4 or criticality >= 4 or exposure == "external_facing" else "P1"
-        action = f"Immediate remediation: {classical.lower()} classical cryptography ({algo})"
-        explanation = (
-            f"Classical status is {classical}. This overrides a favorable quantum horizon because the primitive is already broken/deprecated. "
-            f"Sensitivity={sensitivity}/5, Business Criticality={criticality}/5, Exposure={exposure}."
-        )
-        return _safe_result(tier, priority, action, x, y, z, score, "Risk Score", explanation, score, mosca_status, margin, ratio)
-
-    # Mosca base urgency. This is deliberately monotonic with X+Y vs Z.
-    if ratio > 1.0:
-        base = 72.0
-    elif ratio >= 0.75:
-        base = 57.0
-    elif ratio >= 0.40:
-        base = 38.0
-    else:
-        base = 22.0
-
-    # Context modifiers make sensitive/mission-critical assets rise faster.
-    context = 4.0 * (sensitivity - 3) + 4.0 * (criticality - 3)
-    if purpose in {"key_establishment", "digital_signature"}:
-        context += 5.0
-    if exposure == "external_facing":
-        context += 8.0
-    elif exposure == "internal_service":
-        context += 3.0
-    score = max(0.0, min(100.0, base + context))
-
-    if score >= 80:
-        tier = "CRITICAL"
-    elif score >= 60:
-        tier = "HIGH"
-    elif score >= 35:
-        tier = "MEDIUM"
-    else:
-        tier = "LOW"
-
-    if tier == "CRITICAL":
-        priority = "P0" if sensitivity >= 4 or criticality >= 4 or ratio > 1.0 else "P1"
-        action = f"Start PQC migration immediately: {algo}"
-    elif tier == "HIGH":
-        priority = "P1" if sensitivity >= 4 or criticality >= 4 else "P2"
-        action = f"Plan PQC migration: {algo}"
-    elif tier == "MEDIUM":
-        priority = "P2"
-        action = f"Schedule PQC migration assessment: {algo}"
-    else:
-        priority = "P3"
-        action = f"Inventory and monitor: {algo}"
-
+    # -------------------------------------------------------------------------
+    # MODEL 1: Standard Mosca Inequality (X + Y > Z) — Tuned Thresholds
+    # -------------------------------------------------------------------------
     if method == "Standard Mosca Inequality (X + Y > Z)":
-        metric, label = total, "Exposure (X+Y)"
-    elif method == "Sensitivity-Weighted QPS (W × max(1, (X+Y)/Z))":
-        metric = sensitivity * max(1.0, ratio)
-        label = "Sensitivity-Weighted QPS"
-    elif method == "Data Shelf-Life Ratio (X / Z)":
-        metric = x / z
-        label = "Shelf-Life Ratio (X/Z)"
-    else:
-        metric, label = total, "Exposure (X+Y)"
+        if is_classical_broken:
+            tier = "CRITICAL"
+            priority = "P0"
+            action = f"Immediate Remediation: Classically broken/deprecated ({classical_status})"
+        elif total_exposure > z_safe:
+            tier = "CRITICAL"
+            priority = "P0" if business_criticality >= 4 else "P1"
+            action = f"Critical: Data Exposure ({total_exposure} yrs) exceeds CRQC Horizon ({z_safe} yrs)"
+        elif total_exposure >= (z_safe * 0.75):
+            tier = "HIGH"
+            priority = "P1"
+            action = f"High Risk: Approaching CRQC Horizon (Margin: {margin} yrs)"
+        elif total_exposure >= (z_safe * 0.40):
+            tier = "MEDIUM"
+            priority = "P2"
+            action = "Medium Risk: Schedule Planned PQC Roadmap Review"
+        else:
+            tier = "LOW"
+            priority = "P3"
+            action = "Low Risk: Long-Term Horizon Monitor"
 
-    explanation = (
-        f"Mosca check: X={x:g} yrs + Y={y:g} yrs = {total:g} yrs vs Z={z:g} yrs; "
-        f"margin={margin:g} yrs, ratio={ratio:.2f}x ({mosca_status}). "
-        f"Sensitivity={sensitivity}/5, Business Criticality={criticality}/5, Exposure={exposure}. "
-        f"Final ECDAT risk score={score:.1f}/100."
-    )
-    return _safe_result(tier, priority, action, x, y, z, metric, label, explanation, score, mosca_status, margin, ratio)
+        explanation = (
+            f"Mosca check: X ({x_shelf_life} yrs) + Y ({y_migration_time} yrs) = {total_exposure} yrs vs "
+            f"Z ({z_safe} yrs horizon). Margin = {margin} yrs (Ratio: {exposure_ratio}x)."
+        )
+
+        return {
+            "tier": tier,
+            "priority": priority,
+            "action": action,
+            "X": x_shelf_life,
+            "Y": y_migration_time,
+            "Z": z_crqc_horizon,
+            "exposure_years": total_exposure,
+            "metric_value": total_exposure,
+            "metric_label": "Exposure (X+Y)",
+            "explanation": explanation
+        }
+
+    # -------------------------------------------------------------------------
+    # MODEL 2: Sensitivity-Weighted Quantum Exposure Score (QES) — Tuned
+    # -------------------------------------------------------------------------
+    elif method == "Sensitivity-Weighted QPS (W × max(1, (X+Y)/Z))":
+        w_factor = float(data_sensitivity)
+        if is_classical_broken:
+            qes = round(w_factor * 5.0, 2)
+        else:
+            ratio = max(1.0, exposure_ratio)
+            qes = round(w_factor * ratio, 2)
+
+        if qes >= 6.0:
+            tier = "CRITICAL"
+            priority = "P0"
+            action = f"Urgent PQC Migration Required (Weighted QES: {qes})"
+        elif qes >= 3.5:
+            tier = "HIGH"
+            priority = "P1"
+            action = f"Plan PQC Migration Soon (Weighted QES: {qes})"
+        elif qes >= 1.8:
+            tier = "MEDIUM"
+            priority = "P2"
+            action = f"Schedule Roadmap Review (Weighted QES: {qes})"
+        else:
+            tier = "LOW"
+            priority = "P3"
+            action = f"Monitor & Inventory (Weighted QES: {qes})"
+
+        explanation = (
+            f"Sensitivity-Weighted QES: W ({w_factor}) × max(1, {exposure_ratio}) = {qes}. "
+            f"Data Sensitivity = {data_sensitivity}/5, Business Criticality = {business_criticality}/5."
+        )
+
+        return {
+            "tier": tier,
+            "priority": priority,
+            "action": action,
+            "X": x_shelf_life,
+            "Y": y_migration_time,
+            "Z": z_crqc_horizon,
+            "exposure_years": total_exposure,
+            "metric_value": qes,
+            "metric_label": "QES Score",
+            "explanation": explanation
+        }
+
+    # -------------------------------------------------------------------------
+    # MODEL 3: Data Shelf-Life Exposure Ratio (X / Z) — Tuned
+    # -------------------------------------------------------------------------
+    elif method == "Data Shelf-Life Ratio (X / Z)":
+        shelf_ratio = round(x_shelf_life / z_safe, 2)
+        if is_classical_broken or shelf_ratio >= 1.2:
+            tier = "CRITICAL"
+            priority = "P0"
+            action = f"Critical Shelf-Life Exposure (Ratio: {shelf_ratio}x beyond CRQC)"
+        elif shelf_ratio >= 0.8:
+            tier = "HIGH"
+            priority = "P1"
+            action = f"High Shelf-Life Exposure (Ratio: {shelf_ratio}x)"
+        elif shelf_ratio >= 0.4:
+            tier = "MEDIUM"
+            priority = "P2"
+            action = f"Medium Shelf-Life Exposure (Ratio: {shelf_ratio}x)"
+        else:
+            tier = "LOW"
+            priority = "P3"
+            action = f"Low Shelf-Life Exposure (Ratio: {shelf_ratio}x)"
+
+        explanation = (
+            f"Shelf-Life Ratio: X ({x_shelf_life} yrs) / Z ({z_safe} yrs) = {shelf_ratio}x. "
+            f"Measures how long encrypted data must remain confidential post-CRQC."
+        )
+
+        return {
+            "tier": tier,
+            "priority": priority,
+            "action": action,
+            "X": x_shelf_life,
+            "Y": y_migration_time,
+            "Z": z_crqc_horizon,
+            "exposure_years": total_exposure,
+            "metric_value": shelf_ratio,
+            "metric_label": "Shelf-Life Ratio (X/Z)",
+            "explanation": explanation
+        }
+
+    return {
+        "tier": "LOW",
+        "priority": "P3",
+        "action": "Review Implementation",
+        "X": x_shelf_life,
+        "Y": y_migration_time,
+        "Z": z_crqc_horizon,
+        "exposure_years": total_exposure,
+        "metric_value": 0.0,
+        "metric_label": "N/A",
+        "explanation": "Default low risk evaluation."
+    }
