@@ -29,3 +29,20 @@ build/
 .vscode/
 .idea/*.dmg
 *.dmg
+
+# ECDAT local backups
+app_backup_*.py
+*_backup.py
+backup_phase3_*/
+
+# Local test/demo artifacts
+container_result.json
+container_test/
+test_container_scanner.py
+test_repo/
+test_repo.zip
+java-crypto-examples/
+
+# External/reference repositories
+CBOM/
+bom-examples/
