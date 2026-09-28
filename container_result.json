@@ -1,0 +1,103 @@
+{
+  "status": "success",
+  "image": "pqc-test-image:latest",
+  "image_id": "sha256:1008bf9cbcfd6710315e3ce1a23cc5b732f748e427ee4490adaa6fe7090a1246",
+  "architecture": "arm64",
+  "os": "linux",
+  "created": "2026-09-15T06:43:52.028669552Z",
+  "size": 187366616,
+  "repo_tags": [
+    "pqc-test-image:latest"
+  ],
+  "repo_digests": [],
+  "scan_mode": "live_docker",
+  "layers_scanned": 7,
+  "findings": [
+    {
+      "asset_type": "algorithm",
+      "algorithm": "RSA",
+      "purpose": "key_establishment",
+      "evidence_type": "ACTIVE_USAGE",
+      "file": "/app/crypto_test.py",
+      "line": 5,
+      "snippet": "rsa_key = RSA.generate(2048)",
+      "detection_method": "Python PyCryptodome RSA API",
+      "confidence": 0.98,
+      "container_image": "pqc-test-image:latest",
+      "image_id": "sha256:1008bf9cbcfd6710315e3ce1a23cc5b732f748e427ee4490adaa6fe7090a1246",
+      "language": "Python",
+      "scan_mode": "live_docker",
+      "scan_scope": "application",
+      "asset_id": "container_c078718eaf142987",
+      "layer": 7
+    },
+    {
+      "asset_type": "algorithm",
+      "algorithm": "AES",
+      "purpose": "data_encryption",
+      "evidence_type": "ACTIVE_USAGE",
+      "file": "/app/crypto_test.py",
+      "line": 8,
+      "snippet": "cipher = AES.new(aes_key)",
+      "detection_method": "Python PyCryptodome AES API",
+      "confidence": 0.98,
+      "container_image": "pqc-test-image:latest",
+      "image_id": "sha256:1008bf9cbcfd6710315e3ce1a23cc5b732f748e427ee4490adaa6fe7090a1246",
+      "language": "Python",
+      "scan_mode": "live_docker",
+      "scan_scope": "application",
+      "asset_id": "container_350134ed3bdd4d8f",
+      "layer": 7
+    },
+    {
+      "asset_type": "algorithm",
+      "algorithm": "SHA-256",
+      "purpose": "hashing",
+      "evidence_type": "ACTIVE_USAGE",
+      "file": "/app/crypto_test.py",
+      "line": 10,
+      "snippet": "sha256_value = hashlib.sha256(b\"test\").hexdigest()",
+      "detection_method": "Python hashlib SHA-256 API",
+      "confidence": 0.98,
+      "container_image": "pqc-test-image:latest",
+      "image_id": "sha256:1008bf9cbcfd6710315e3ce1a23cc5b732f748e427ee4490adaa6fe7090a1246",
+      "language": "Python",
+      "scan_mode": "live_docker",
+      "scan_scope": "application",
+      "asset_id": "container_b90a87f8e9033578",
+      "layer": 7
+    },
+    {
+      "asset_type": "algorithm",
+      "algorithm": "SHA-1",
+      "purpose": "hashing",
+      "evidence_type": "ACTIVE_USAGE",
+      "file": "/app/crypto_test.py",
+      "line": 12,
+      "snippet": "sha1_value = hashlib.sha1(b\"legacy\").hexdigest()",
+      "detection_method": "Python hashlib SHA-1 API",
+      "confidence": 0.98,
+      "container_image": "pqc-test-image:latest",
+      "image_id": "sha256:1008bf9cbcfd6710315e3ce1a23cc5b732f748e427ee4490adaa6fe7090a1246",
+      "language": "Python",
+      "scan_mode": "live_docker",
+      "scan_scope": "application",
+      "asset_id": "container_69d2a764403d217a",
+      "layer": 7
+    }
+  ],
+  "statistics": {
+    "total_findings": 4,
+    "active_crypto_usage": 4,
+    "library_presence": 0,
+    "configuration_findings": 0,
+    "unique_algorithms": 4,
+    "algorithms": [
+      "AES",
+      "RSA",
+      "SHA-1",
+      "SHA-256"
+    ],
+    "layers_scanned": 7
+  }
+}

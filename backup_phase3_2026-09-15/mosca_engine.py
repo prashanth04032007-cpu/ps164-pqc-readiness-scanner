@@ -111,8 +111,7 @@ def _safe_result(tier: str, priority: str, action: str, x: float, y: float, z: f
                  mosca_status: str = "NOT_APPLICABLE", margin: float = 0.0,
                  ratio: float = 0.0) -> dict:
     return {
-        "tier": tier, "risk_tier": tier,
-        "priority": priority, "action": action,
+        "tier": tier, "priority": priority, "action": action,
         "X": x, "Y": y, "Z": z,
         "exposure_years": round(x + y, 2),
         "metric_value": round(metric, 2), "metric_label": label,

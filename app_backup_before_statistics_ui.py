@@ -11,25 +11,32 @@ from pathlib import Path
 # ============================================================
 
 def select_repository_folder():
-    """Open a native folder picker.
+    """Open the native macOS folder picker."""
 
-    Cross-platform via tkinter (works on Windows, macOS, Linux desktops).
-    Raises on failure so the caller can fall back to manual path entry.
-    """
-    import tkinter as tk
-    from tkinter import filedialog
+    script = (
+        'try\n'
+        'set selectedFolder to choose folder with prompt '
+        '"Select Source Code Repository"\n'
+        'return POSIX path of selectedFolder\n'
+        'on error number -128\n'
+        'return ""\n'
+        'end try'
+    )
 
-    root = tk.Tk()
-    root.withdraw()
-    root.attributes("-topmost", True)
-    try:
-        folder = filedialog.askdirectory(
-            title="Select Source Code Repository"
+    result = subprocess.run(
+        ["osascript", "-e", script],
+        capture_output=True,
+        text=True,
+        timeout=300,
+    )
+
+    if result.returncode != 0:
+        raise RuntimeError(
+            result.stderr.strip()
+            or "macOS folder picker failed."
         )
-    finally:
-        root.destroy()
 
-    return folder
+    return result.stdout.strip()
 
 
 import subprocess
@@ -67,7 +74,6 @@ from cbom_formatter import (
     get_recommendation,
 )
 from pqc_recommendations import get_pqc_recommendation, recommendation_columns
-from algorithm_patcher import render_critical_algorithm_alerts
 
 
 # ============================================================
@@ -558,74 +564,48 @@ if discovery_source == "📁 Source Repository":
     if repository_input_mode == "📁 Local Folder":
 
         st.caption(
-            "Select an existing source-code repository/project folder — "
-            "either click Browse to open a folder picker, or paste the "
-            "full folder path directly into the box below."
+            "Select an existing source-code repository/project folder."
         )
 
-        browse_col, _spacer_col = st.columns([1, 3])
+        if st.button(
+            "📁 Select Repository Folder",
+            key="select_repository_folder",
+        ):
 
-        with browse_col:
+            try:
 
-            if st.button(
-                "📁 Browse...",
-                key="select_repository_folder",
-            ):
+                selected_folder = select_repository_folder()
 
-                try:
+                if selected_folder:
 
-                    selected_folder = select_repository_folder()
-
-                    if selected_folder:
-
-                        selected_path = Path(
-                            selected_folder
-                        )
-
-                        if (
-                            selected_path.exists()
-                            and selected_path.is_dir()
-                        ):
-
-                            st.session_state[
-                                "selected_repository_folder"
-                            ] = str(selected_path)
-
-                        else:
-
-                            st.error(
-                                "Selected path is not a valid folder."
-                            )
-
-                except Exception as exc:
-
-                    st.error(
-                        f"Native folder browser is unavailable ({exc}). "
-                        "Please paste the folder path into the box below "
-                        "instead."
+                    selected_path = Path(
+                        selected_folder
                     )
 
-        typed_folder_path = st.text_input(
-            "...or paste the full folder path here",
-            key="selected_repository_folder",
-            placeholder=r"e.g. C:\Users\you\Projects\my-repo  or  /home/you/my-repo",
-        )
+                    if (
+                        selected_path.exists()
+                        and selected_path.is_dir()
+                    ):
+
+                        st.session_state[
+                            "selected_repository_folder"
+                        ] = str(selected_path)
+
+                    else:
+
+                        st.error(
+                            "Selected path is not a valid folder."
+                        )
+
+            except Exception as exc:
+
+                st.error(
+                    f"Unable to open folder picker: {exc}"
+                )
 
         selected_folder = st.session_state.get(
             "selected_repository_folder"
         )
-
-        if selected_folder and not (
-            Path(selected_folder).exists()
-            and Path(selected_folder).is_dir()
-        ):
-
-            st.warning(
-                "That path doesn't exist or isn't a folder yet -- "
-                "finish typing/pasting the full path, or use Browse."
-            )
-
-            selected_folder = None
 
         if selected_folder:
 
@@ -901,36 +881,9 @@ if discovery_source == "📁 Source Repository":
 
                         st.session_state["repository_inventory_df"] = repository_df.copy()
 
-                        # ----------------------------------------
-                        # Capture raw content for CRITICAL files only,
-                        # while the temp directory still exists, so the
-                        # Critical Algorithm Alerts feature can offer a
-                        # patched download after this block exits and
-                        # the temp directory is cleaned up. Isolated
-                        # dict; nothing else reads or writes this.
-                        # ----------------------------------------
-
-                        _repo_file_content_lookup = {}
-                        if "Risk Tier" in repository_df.columns:
-                            _critical_files = set(
-                                repository_df.loc[
-                                    repository_df["Risk Tier"] == "CRITICAL",
-                                    "file",
-                                ].astype(str)
-                            )
-                            for _rel_path in _critical_files:
-                                try:
-                                    _abs_path = repository_root / _rel_path
-                                    _repo_file_content_lookup[_rel_path] = (
-                                        _abs_path.read_bytes()
-                                    )
-                                except Exception:
-                                    pass
-
                     else:
 
                         repository_df = pd.DataFrame()
-                        _repo_file_content_lookup = {}
 
             # ====================================================
             # SUCCESS
@@ -941,99 +894,53 @@ if discovery_source == "📁 Source Repository":
             )
 
             # ====================================================
-            # CRITICAL ALGORITHM ALERTS (additive, isolated feature)
-            # Shown a step above the discovery metrics/table so
-            # critical findings are surfaced immediately after
-            # analysis.
-            # ====================================================
-
-            render_critical_algorithm_alerts(
-                repository_df,
-                _repo_file_content_lookup,
-                scope_prefix="repo",
-            )
-
-            # ====================================================
-
             # DISCOVERY METRICS
-
             # ====================================================
 
-            discovered_files = int(
-                repository_stats.get(
-                    "total_files",
-                    0,
-                )
-            )
-
-            ignored_files = int(
-                repository_stats.get(
-                    "ignored_files",
-                    0,
-                )
-            )
-
-            analyzed_files = max(
-                discovered_files - ignored_files,
-                0,
-            )
-
-            source_code_files = int(
-                repository_stats.get(
-                    "source_files",
-                    0,
-                )
-            )
-
-            crypto_assets = len(repository_df)
-
-            language_count = len(
-                repository_stats.get(
-                    "languages",
-                    {},
-                )
-            )
-
-            metric1, metric2, metric3, metric4, metric5, metric6 = (
-                st.columns(6)
+            metric1, metric2, metric3, metric4, metric5 = (
+                st.columns(5)
             )
 
             metric1.metric(
-                "Discovered Files",
-                discovered_files,
+                "Total Files",
+                repository_stats.get(
+                    "total_files",
+                    0,
+                ),
             )
 
             metric2.metric(
-                "Analyzed Files",
-                analyzed_files,
+                "Source Files",
+                repository_stats.get(
+                    "source_files",
+                    0,
+                ),
             )
 
             metric3.metric(
-                "Source-Code Files",
-                source_code_files,
+                "Crypto Assets",
+                len(repository_df),
             )
 
             metric4.metric(
-                "Crypto Assets",
-                crypto_assets,
+                "Ignored Files",
+                repository_stats.get(
+                    "ignored_files",
+                    0,
+                ),
             )
 
             metric5.metric(
-                "Ignored Files",
-                ignored_files,
-            )
-
-            metric6.metric(
                 "Languages",
-                language_count,
+                len(
+                    repository_stats.get(
+                        "languages",
+                        {},
+                    )
+                ),
             )
 
-            st.caption(
-                f"📋 File accounting: {discovered_files} discovered "
-                f"→ {ignored_files} ignored → {analyzed_files} analyzed. "
-                "Ignored files are excluded from cryptographic analysis."
-            )
-
+            # ====================================================
             # LANGUAGE BREAKDOWN
             # ====================================================
 
@@ -2370,22 +2277,6 @@ if discovery_source == "🎯 Targeted Asset":
                     "Displaying hypothetical post-migration "
                     "inventory state."
                 )
-
-            # ====================================================
-            # CRITICAL ALGORITHM ALERTS (additive, isolated feature)
-            # Shown a step above the dashboard/table so critical
-            # findings are surfaced immediately after analysis.
-            # ====================================================
-
-            _individual_file_content_lookup = {
-                uf.name: uf.getvalue() for uf in uploaded_files
-            }
-
-            render_critical_algorithm_alerts(
-                df,
-                _individual_file_content_lookup,
-                scope_prefix="indiv",
-            )
 
             # ====================================================
             # EXECUTIVE METRICS
