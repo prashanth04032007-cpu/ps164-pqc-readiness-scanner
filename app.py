@@ -535,16 +535,15 @@ if discovery_source == "📁 Source Repository":
     )
 
     st.caption(
-        "Scan a local source-code repository folder or upload a ZIP. "
-        "ECDAT recursively discovers source files, scans them "
-        "for cryptographic artefacts and sends the findings "
-        "through the same risk, Mosca and recommendation engines."
+        "Upload a source-code repository as a ZIP archive for "
+        "cryptographic discovery, quantum-risk assessment, "
+        "Mosca analysis, and PQC migration recommendations."
     )
 
 
     repository_input_mode = st.radio(
         "Repository Input",
-        ["📁 Local Folder", "📦 ZIP Archive"],
+        ["📦 ZIP Archive", "📁 Local Folder (Local Testing)"],
         horizontal=True,
         key="repository_input_mode",
     )
@@ -555,7 +554,7 @@ if discovery_source == "📁 Source Repository":
     # LOCAL FOLDER
     # ------------------------------------------------------------
 
-    if repository_input_mode == "📁 Local Folder":
+    if repository_input_mode == "📁 Local Folder (Local Testing)":
 
         st.caption(
             "Select an existing source-code repository/project folder — "
